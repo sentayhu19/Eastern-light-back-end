@@ -1,5 +1,6 @@
 const { check }  = require ( 'express-validator' );
 const db = require ( '../db' );
+const {compare} = require('bcryptjs');
 
 //password
 const password = check( 'password' )
@@ -23,9 +24,17 @@ if (rows.length) {
 
 //login validation
 const loginFieldsCheck =  check(email).custom(async(value, {req}) => {
-    return console.log(req.body);
+   const user =  await db.query('select * from users where email = $1', [value])
+   if(!user.rows.length){
+    throw new Error('Email does not  exists');
+   }
+   const validPassword = await compare(req.body.password, user.rows[0].password)
+   if(!validPassword){
+    throw new Error('Password is incorrect');
+   }
 })
 
 module.exports ={
     registerValidation: [email, password, emailExists],
+    loginValidation: [loginFieldsCheck],
 }
