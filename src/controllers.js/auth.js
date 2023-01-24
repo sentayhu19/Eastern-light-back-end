@@ -3,8 +3,12 @@ const { hash} = require('bcryptjs')
 
 exports.getUsers = async (req, res) => {
     try {
-        const response = await db.query('select * from users')
-        console.log("RESPONSE: ",response)
+        const {rows} = await db.query('select user_id, email from users')
+        return res.status(200).json({
+            success: true,
+            users: rows,
+        })
+    
     }
     catch(err){
         console.log("ERROR: ",err)

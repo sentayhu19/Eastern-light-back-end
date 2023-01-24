@@ -21,6 +21,11 @@ if (rows.length) {
 }
 });
 
+//login validation
+const loginFieldsCheck =  check(email).custom(async(value, {req}) => {
+    return console.log(req.body);
+})
+
 module.exports ={
     registerValidation: [email, password, emailExists],
 }
