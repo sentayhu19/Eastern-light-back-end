@@ -7,6 +7,7 @@ const authRoutes = require('./src/routes/auth')
 console.log("PORT: ",PORT)
 
 //inisialize routes
+app.use(express.json());
 app.use('/api', authRoutes)
 
 const appStart = () => {
