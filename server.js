@@ -1,14 +1,29 @@
 const express = require('express')
 const app = express();
-const {PORT} = require('./src/constants')
+const cookieParser = require('cookie-parser')
+const { PORT, CLIENT_ID } = require('./src/constants')
 const authRoutes = require('./src/routes/auth')
+const passport = require('passport');
+const cors = require('cors')
+//import routes
+
+//import passport middleware
+require('./src/middlewares/passport-middleware')
 
 //app starts listening on port 8000
 console.log("PORT: ",PORT)
 
-//inisialize routes
+//initialize cookie-parser to allow us access the cookies stored in the browser.
 app.use(express.json());
+app.use(cookieParser())
+app.use(cors({origin: CLIENT_ID, credentials: true}))
+app.use(passport.initialize())
+
+
+
+//initialize routes
 app.use('/api', authRoutes)
+
 
 const appStart = () => {
     try {

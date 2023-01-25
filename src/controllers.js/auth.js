@@ -1,5 +1,8 @@
 const db = require('../db')
 const { hash} = require('bcryptjs')
+const { sign } = require('jsonwebtoken')
+const { SECRET } = require('../constants') 
+
 
 exports.getUsers = async (req, res) => {
     try {
@@ -30,5 +33,41 @@ exports.register = async (req, res) => {
       return res.status(500).json({
         error: err.message
       })
+    }
+}
+
+exports.login = async (req, res) => {
+    let user = req.user
+
+   let payload = {
+        id: user.user_id,
+        email: user.email,
+        username: user.username
+    }
+    try {
+        const token = await sign(payload, SECRET)
+return res.status(200).cookie('token', token, {httpOnly: true}).json({
+    success: true,
+    message: 'User logged in successfully'
+    })
+}
+    catch(err){
+        console.log("ERROR: ",err.message)
+      return res.status(500).json({
+        error: err.message
+      })
+    }
+}
+
+exports.protected = async (req, res) => {
+    try {
+       
+        return res.status(200).json({
+           info: 'This is a protected route'
+        })
+    
+    }
+    catch(err){
+        console.log("ERROR: ",err)
     }
 }

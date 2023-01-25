@@ -23,8 +23,9 @@ if (rows.length) {
 });
 
 //login validation
-const loginFieldsCheck =  check(email).custom(async(value, {req}) => {
-   const user =  await db.query('select * from users where email = $1', [value])
+const loginFieldsCheck =  check('email').custom(async(value, {req}) => {
+    console.log("LOGIN VALUE IS", value)
+   const user =  await db.query('SELECT * FROM users WHERE email = $1', [value])
    if(!user.rows.length){
     throw new Error('Email does not  exists');
    }
@@ -32,6 +33,7 @@ const loginFieldsCheck =  check(email).custom(async(value, {req}) => {
    if(!validPassword){
     throw new Error('Password is incorrect');
    }
+   req.user = user.rows[0]
 })
 
 module.exports ={
