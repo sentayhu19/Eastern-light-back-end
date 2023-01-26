@@ -105,12 +105,25 @@ exports.logout = async (req, res) => {
     }
 }
 
+exports.getProducts = async (req, res) => {
+    try {
+        const {rows} = await db.query('select * from products')
+        return res.status(200).json({
+            success: true,
+            products: rows,
+        })
+    
+    }
+    catch(err){
+        console.log("ERROR: ",err)
+    }
+}
+
 // CATEGORIES ***********************************************************************************************
 
 exports.addnewcategory = async (req, res) => {
     const { name } = req.body
     try {
-        const hashedPassword = await hash(password, 10)
         await db.query('insert into category (name) values ($1)', [name])
         return res.status(201).json({
             success: true,
@@ -124,3 +137,18 @@ exports.addnewcategory = async (req, res) => {
       })
     }
 }
+
+exports.getCategories = async (req, res) => {
+    try {
+        const {rows} = await db.query('select * from category')
+        return res.status(200).json({
+            success: true,
+            category: rows,
+        })
+    
+    }
+    catch(err){
+        console.log("ERROR: ",err)
+    }
+}
+
