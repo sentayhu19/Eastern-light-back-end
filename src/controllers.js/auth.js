@@ -105,3 +105,23 @@ exports.logout = async (req, res) => {
       })
     }
 }
+
+// CATEGORIES ***********************************************************************************************
+
+exports.addnewcategory = async (req, res) => {
+    const { name, description, brand, price, image, priority } = req.body
+    try {
+        const hashedPassword = await hash(password, 10)
+        await db.query('insert into products (email, password, username) values ($1, $2, $3, $4, $5)', [name, description,brand, price, image, priority])
+        return res.status(201).json({
+            success: true,
+            message: 'User registered successfully'
+        })
+    }
+    catch(err){
+        console.log("ERROR: ",err.message)
+      return res.status(500).json({
+        error: err.message
+      })
+    }
+}
