@@ -74,13 +74,34 @@ exports.protected = async (req, res) => {
 
 exports.logout = async (req, res) => {
     try {
-        return res.status(200).clearCookie('token', {httpOnly: true}).json({
+        console.log("LOGOUT FROM DEVICE")
+      return res.status(200).clearCookie('token', { httpOnly: true }).json({
+        success: true,
+        message: 'Logged out succefully',
+      })
+    } catch (error) {
+      console.log(error.message)
+      return res.status(500).json({
+        error: error.message,
+      })
+    }
+  }
+
+  //PRODUCTS ***********************************************************************************************
+  exports.addnewproduct = async (req, res) => {
+    const { name, description, brand, price, image, priority } = req.body
+    try {
+        const hashedPassword = await hash(password, 10)
+        await db.query('insert into products (email, password, username) values ($1, $2, $3, $4, $5)', [name, description,brand, price, image, priority])
+        return res.status(201).json({
             success: true,
-            message: 'Logged out successfully'
-            })
-    
+            message: 'User registered successfully'
+        })
     }
     catch(err){
-        console.log("ERROR: ",err)
+        console.log("ERROR: ",err.message)
+      return res.status(500).json({
+        error: err.message
+      })
     }
 }
