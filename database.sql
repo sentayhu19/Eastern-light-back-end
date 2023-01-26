@@ -17,7 +17,6 @@ CREATE DATABASE eastern-light;
 CREATE TABLE category (
       id serial primary key,
       name varchar(255) not null,
-      description varchar(255) not null,
       created_at date default CURRENT_DATE
 )
 
