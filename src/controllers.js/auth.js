@@ -89,13 +89,12 @@ exports.logout = async (req, res) => {
 
   //PRODUCTS ***********************************************************************************************
   exports.addnewproduct = async (req, res) => {
-    const { name, description, brand, price, image, priority } = req.body
+    const { name, description, brand, price, image, priority, category_id } = req.body
     try {
-        const hashedPassword = await hash(password, 10)
-        await db.query('insert into products (name, description, brand, price, image, priority) values ($1, $2, $3, $4, $5)', [name, description,brand, price, image, priority])
+        await db.query('insert into products (name, description, brand, price, image, priority, category_id) values ($1, $2, $3, $4, $5, $6, $7)', [name, description, brand, price, image, priority, category_id])
         return res.status(201).json({
             success: true,
-            message: 'User registered successfully'
+            message: 'Product created successfully'
         })
     }
     catch(err){
@@ -112,10 +111,10 @@ exports.addnewcategory = async (req, res) => {
     const { name } = req.body
     try {
         const hashedPassword = await hash(password, 10)
-        await db.query('insert into products (name) values ($1)', [name])
+        await db.query('insert into category (name) values ($1)', [name])
         return res.status(201).json({
             success: true,
-            message: 'User registered successfully'
+            message: 'Category created successfully'
         })
     }
     catch(err){
