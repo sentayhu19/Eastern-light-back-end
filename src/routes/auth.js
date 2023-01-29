@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const { getUsers, register, login, protected, logout, addnewproduct, addnewcategory, getCategories, getProducts } = require('../controllers.js/auth');
+const { getUsers, register, login, protected, logout, addnewproduct, addnewcategory, getCategories, getProducts, getproductshow,getsearchbycat } = require('../controllers.js/auth');
 const { registerValidation , loginValidation} = require('../validators/auth');
 const { validationMiddleware } = require('../middlewares/validations-middleware');
 const { userAuth } = require('../middlewares/auth-middleware');
@@ -14,5 +14,7 @@ router.post('/addproduct',addnewproduct)
 router.post('/addcategory',addnewcategory)
 router.get('/getproducts',getProducts)
 router.get('/getcategories',getCategories)
+router.get('/productshow', getproductshow)  //order with priority
+router.post('/searchbycat', getsearchbycat);
 
 module.exports = router;
