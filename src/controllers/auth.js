@@ -166,7 +166,6 @@ exports.getsearchbycat = async (req, res) => {
       "SELECT * FROM products WHERE category_id = $1",
       [category_id]
     );
-    console.log("Got ... ", category_id, "REspons with", rows);
     return res.status(200).json({
       success: true,
       products: rows,
