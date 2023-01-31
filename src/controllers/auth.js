@@ -11,7 +11,9 @@ exports.getUsers = async (req, res) => {
       users: rows,
     });
   } catch (err) {
-    console.log("ERROR: ", err);
+    return res.status(500).json({
+      error: err.message,
+    });
   }
 };
 
@@ -63,7 +65,9 @@ exports.protected = async (req, res) => {
       info: "This is a protected route",
     });
   } catch (err) {
-    console.log("ERROR: ", err);
+    return res.status(500).json({
+      error: err.message,
+    })
   }
 };
 
@@ -111,7 +115,9 @@ exports.getProducts = async (req, res) => {
       products: rows,
     });
   } catch (err) {
-    console.log("ERROR: ", err);
+    return res.status(500).json({
+      error: err.message,
+    })
   }
 };
 
@@ -141,7 +147,10 @@ exports.getCategories = async (req, res) => {
       category: rows,
     });
   } catch (err) {
-    console.log("ERROR: ", err);
+   return res.status(500).json({
+      error: err.message,
+      message: "unable to get category"
+   })
   }
 };
 
@@ -155,7 +164,10 @@ exports.getproductshow = async (req, res) => {
       products: rows,
     });
   } catch (err) {
-    console.log("ERROR: ", err);
+   return res.status(500).json({
+      error: err.message,
+      message: "unable to get product"
+   })
   }
 };
 
@@ -171,6 +183,8 @@ exports.getsearchbycat = async (req, res) => {
       products: rows,
     });
   } catch (err) {
-    console.log("Error: ", err);
+   return res.status(500).json({
+      error: err.message,
+   })
   }
 };

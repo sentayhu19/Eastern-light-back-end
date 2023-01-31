@@ -2,7 +2,6 @@ const db = require("../db");
 
 exports.deleteproduct = async (req, res) => {
     const { id } = req.body;
-    console.log("ID: ", id)
     try {
       const { rows } = await db.query(
         "DELETE FROM products WHERE id = $1",
@@ -13,6 +12,8 @@ exports.deleteproduct = async (req, res) => {
         message: "Product deleted successfully",
       });
     } catch (err) {
-      console.log("Error: ", err);
+     return res.status(500).json({
+        error: err.message,
+      });
     }
   };

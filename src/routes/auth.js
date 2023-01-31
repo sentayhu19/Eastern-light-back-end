@@ -17,6 +17,6 @@ router.get('/getproducts',getProducts)
 router.get('/getcategories',getCategories)
 router.get('/productshow', getproductshow)  //order with priority
 router.post('/searchbycat', getsearchbycat);
-router.delete('/deleteproduct', deleteproduct);
+router.post('/deleteproduct', deleteproduct);
 
 module.exports = router;
