@@ -35,3 +35,11 @@ CREATE TABLE category (
 )
 
  
+CREATE TABLE messages (
+      id serial primary key,
+      name varchar(255) not null,
+      email varchar(255),
+      phone varchar(255),
+      message varchar(255) not null,
+      created_at date default CURRENT_DATE
+)

@@ -59,7 +59,7 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.protected = async (req, res) => {
+exports.protectedset = async (req, res) => {
   try {
     return res.status(200).json({
       info: "This is a protected route",
