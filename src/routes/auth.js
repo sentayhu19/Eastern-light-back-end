@@ -22,5 +22,5 @@ router.post('/deleteproduct', deleteproduct);
 router.put('/editproduct', editproduct);
 router.get('/getproduct/:id', getproduct);  //individual product
 router.post('/addmessage', addmessage);
-router.get('/getmessage', getmessages)
+router.get('/getmessages', getmessages)
 module.exports = router;

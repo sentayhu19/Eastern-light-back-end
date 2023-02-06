@@ -1,10 +1,20 @@
+const db = require("../db");
 exports.addmessage = async (req, res) => {
+    const {name, email,phone} = req.body;
+    const message = req.body.sendmessage;
     try {
-        const {name, email,phone, message} = req.body;
-        const newMessage = await db.query("INSERT INTO messages (name, email,phone, message) VALUES ($1, $2, $3) RETURNING *", [name, email,phone, message]);
-        res.json(newMessage.rows[0]);
+        console.log("GO INFORMATIONS:  ", req.body);
+        await db.query(
+            "INSERT INTO messages (name, email, phone, message) VALUES ($1, $2, $3, $4)",
+             [name, email,phone, message]);
+             return res.status(201).json({
+            success: true,
+            message: "Message sent successfully",
+        });
     } catch (err) {
-        console.error(err.message);
+       res.status(500).json({
+              error: err.message,
+            });
     }
 }
 
@@ -13,6 +23,8 @@ exports.getmessages = async (req, res) => {
         const allMessages = await db.query("SELECT * FROM messages");
         res.json(allMessages.rows);
     } catch (err) {
-        console.error(err.message);
+        res.status(500).json({
+            error: err.message,
+          });
     }
 }
