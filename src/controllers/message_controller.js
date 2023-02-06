@@ -20,8 +20,11 @@ exports.addmessage = async (req, res) => {
 
 exports.getmessages = async (req, res) => {
     try {
-        const allMessages = await db.query("SELECT * FROM messages");
-        res.json(allMessages.rows);
+        const {rows} = await db.query("SELECT * FROM messages");
+        return res.json({
+            success: true,
+            messages: rows,
+        })
     } catch (err) {
         res.status(500).json({
             error: err.message,
