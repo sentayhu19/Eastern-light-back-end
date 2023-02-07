@@ -31,6 +31,8 @@ CREATE TABLE category (
       image varchar(255) ,
       created_at date default CURRENT_DATE,
       priority INT ,
+      unit int ,
+      box int ,
       category_id INT, FOREIGN KEY (category_id) REFERENCES category(id)
 )
 
@@ -41,5 +43,5 @@ CREATE TABLE messages (
       email varchar(255),
       phone varchar(255) not null,
       message varchar(255) not null,
-      created_at date default CURRENT_DATE
+      created_at timestamp default CURRENT_DATE
 )
