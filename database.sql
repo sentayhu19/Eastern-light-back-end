@@ -1,20 +1,25 @@
 CREATE DATABASE eastern-light;
-
-
-
 -- USERS table
  
- create table users (
+ CREATE  TABLE users (
     user_id  serial  primary key,
-    username varchar(255) not null,
+    username varchar(255),
     password varchar(255) not null,
     email varchar(255) UNIQUE not null,
     created_at date default CURRENT_DATE
  )
 
+CREATE TABLE messages (
+      id serial primary key,
+      name varchar(255) not null,
+      email varchar(255),
+      phone varchar(255) not null,
+      message varchar(255) not null,
+      created_at timestamp default CURRENT_DATE
+)
 
 -- Category table
-CREATE TABLE category (
+CREATE  TABLE category (
       id serial primary key,
       name varchar(255) not null,
       created_at date default CURRENT_DATE
@@ -37,11 +42,4 @@ CREATE TABLE category (
 )
 
  
-CREATE TABLE messages (
-      id serial primary key,
-      name varchar(255) not null,
-      email varchar(255),
-      phone varchar(255) not null,
-      message varchar(255) not null,
-      created_at timestamp default CURRENT_DATE
-)
+
