@@ -144,13 +144,12 @@ exports.addview = async (req, res) => {
   const { id } = req.body;
   try {
     const { rows } = await db.query("UPDATE products SET view = view + 1 WHERE id = $1", [id]);
-    console.log("ROWs", rows)
+   
     return res.status(200).json({
       sucess: true,
       message: "View added successfully",
     });
   } catch (err) {
-    console.log("Error", err.message)
     return res.status(500).json({
       error: err.message,
     });
