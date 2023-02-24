@@ -36,10 +36,18 @@ CREATE  TABLE category (
       image varchar(255) ,
       created_at date default CURRENT_DATE,
       priority INT ,
-      unit int ,
+      unit_id INT, FOREIGN KEY (unit_id) REFERENCES unit(id),
       box int ,
       category_id INT, FOREIGN KEY (category_id) REFERENCES category(id)
 )
 
- 
+ ALTER TABLE Products ADD COLUMN unit_id INT, ADD CONSTRAINT fk_unit FOREIGN KEY (unit_id) REFERENCES unit(id);
 
+
+CREATE  TABLE unit (
+      id serial primary key,
+      name varchar(255) not null,
+      created_at date default CURRENT_DATE
+)
+
+-- ALTER TABLE Products ADD COLUMN unit_id INT, ADD CONSTRAINT fk_unit FOREIGN KEY (unit_id) REFERENCES unit(id);

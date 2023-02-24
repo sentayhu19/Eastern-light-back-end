@@ -18,6 +18,8 @@ const {
   addnewproduct,
   getProducts,
   getproductshow,
+  addunit,
+  getunit,
 } = require("../controllers/products_controller");
 const {
   addmessage,
@@ -46,4 +48,6 @@ router.put("/editproduct", editproduct);
 router.get("/getproduct/:id", getproduct); //individual product
 router.post("/addmessage", addmessage);
 router.get("/getmessages", getmessages);
+router.post('/addunit', addunit)
+router.get('/getunit', getunit)
 module.exports = router;

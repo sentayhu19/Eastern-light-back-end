@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/easternlightphar/public_html/
-   - /bin/cp -R ./  $DEPLOYPATH

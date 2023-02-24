@@ -23,7 +23,7 @@ app.use(passport.initialize())
 
 
 //initialize routes
-app.use('/api', authRoutes)
+app.use('/v1', authRoutes)
 
 
 const appStart = () => {
@@ -31,8 +31,13 @@ const appStart = () => {
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`)
         })
+        // app.listen();
+      
         } catch(err){ 
-console.log("OPPS! ERROR OCURED... ",err)
+                res.status(500).json({
+                    error: err.message,
+                    message: "unable to start server",
+                });
             }
     }
 appStart()
