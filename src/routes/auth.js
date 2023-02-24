@@ -20,6 +20,8 @@ const {
   getproductshow,
   addunit,
   getunit,
+  addview,
+  getview,
 } = require("../controllers/products_controller");
 const {
   addmessage,
@@ -50,4 +52,5 @@ router.post("/addmessage", addmessage);
 router.get("/getmessages", getmessages);
 router.post('/addunit', addunit)
 router.get('/getunit', getunit)
+router.patch('/addview', addview)
 module.exports = router;
